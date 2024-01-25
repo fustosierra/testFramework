@@ -1,0 +1,5 @@
+ext.versions = [
+        seleniumVersion : '3.141.59',
+        allureTestNGVersion : '2.18.1',
+        restTemplateVersion : '5.2.1.RELEASE'
+]

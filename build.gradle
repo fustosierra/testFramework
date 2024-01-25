@@ -1,0 +1,58 @@
+buildscript {
+    apply from: 'versions.gradle'
+}
+plugins {
+    id 'java'
+    id 'io.qameta.allure' version "2.10.0"
+}
+
+group 'org.testFramework'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.seleniumhq.selenium:selenium-java:$versions.seleniumVersion"
+    implementation "io.qameta.allure:allure-testng:$versions.allureTestNGVersion"
+    implementation "org.springframework:spring-web:$versions.restTemplateVersion"
+    implementation "org.springframework:spring-test:$versions.restTemplateVersion"
+
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8;
+targetCompatibility = JavaVersion.VERSION_1_8;
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
+
+wrapper {
+    gradleVersion = '6.9'
+    distributionType = Wrapper.DistributionType.BIN
+}
+
+tasks.withType(Test) {
+    logging.captureStandardOutput(LogLevel.INFO)
+    beforeTest { println "\n*** Starting execution of test ${it.className}.${it.name} ***" }
+    afterTest { descriptor, result ->
+        println "<<< Test ${descriptor.name} resulted in ${result.resultType}"
+    }
+
+    testLogging {
+        events = ["passed", "failed", "skipped"]
+        showStandardStreams = true
+        exceptionFormat "full"
+    }
+}
+
+task cleanAndBuild() {
+    def gradleCacheLocation = "~/.gradle/caches"
+    file(gradleCacheLocation).list().each {
+        delete "${gradleCacheLocation}/${it}"
+    }
+    finalizedBy(['build', 'extractGXUtils'])
+}
+
+test {
+    useJUnitPlatform()
+}
