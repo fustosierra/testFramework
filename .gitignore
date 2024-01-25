@@ -1,0 +1,33 @@
+.allure/
+allure-results/
+build/
+out/
+test-output/
+logs/*
+Logs/
+test-logs
+*.iml
+*.orig
+*.log
+/.classpath
+log4.properties
+package-info.java
+./test-output/
+!gradle-wrapper.jar
+results/
+test-results/
+*.project*
+*.settings*
+
+### JAVA ###
+*.class
+*.classpath
+
+#Gradle property files#
+.gradle/
+.idea/
+.DS_Store
+*.ipr
+*.iws
+/bin/
+.allure
