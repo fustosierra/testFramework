@@ -26,6 +26,8 @@ test-results/
 #Gradle property files#
 .gradle/
 .idea/
+.idea/*
+*.idea/*
 .DS_Store
 *.ipr
 *.iws
