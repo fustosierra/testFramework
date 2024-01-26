@@ -24,7 +24,7 @@ test-results/
 *.classpath
 
 #Gradle property files#
-.gradle/
+.gradle/*
 .idea/
 .idea/*
 *.idea/*
